@@ -1,8 +1,11 @@
 const router = require('express').Router();
 const { signIn, signUp, signOut } = require('../controllers/auth');
+const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
+const { getMe, updateUser } = require('../controllers/users');
 const tokenCheck = require('../middleware/auth');
 const ErrorNotFound = require('../middleware/ErrorNotFound');
 const { writeErrorLog } = require('../middleware/logging');
+const { validateGetMovie } = require('../middleware/validation-url');
 
 router.post('/signup', signUp);
 router.post('/signin', signIn);
@@ -15,12 +18,12 @@ router.patch('/404', (req, res, next) => {
 
 router.use(tokenCheck);
 
-router.get('/users/me');
-router.patch('/users/me');
+router.get('/users/me', getMe);
+router.patch('/users/me', updateUser);
 
-router.get('/movies');
-router.post('/movies');
-router.delete('/movies/:_id');
+router.get('/movies', getMovies);
+router.post('/movies', createMovie);
+router.delete('/movies/:_id', validateGetMovie, deleteMovie);
 
 router.use('*', (req, res, next) => {
   writeErrorLog(req, 'Unknown route invoked.');
