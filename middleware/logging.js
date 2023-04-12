@@ -4,7 +4,7 @@ const fs = require('fs');
 const { ERROR_CODE_INTERNAL_SERVER_ERROR } = require('../config/config');
 
 const initLogging = () => {
-  const logDir = path.join(__dirname, 'logs');
+  const logDir = path.join(process.cwd(), 'logs');
   const requestLoggerFile = path.join(logDir, 'request.log');
   const errorLoggerFile = path.join(logDir, 'error.log');
   if (!fs.existsSync(logDir)) {
