@@ -8,7 +8,6 @@ const router = require('./routes/routes');
 const { URL, PORT } = require('./config/config');
 const {
   initLogging,
-  requestLogger,
   logErrors,
   writeRequestLog,
 } = require('./middleware/logging');

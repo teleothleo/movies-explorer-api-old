@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const ErrorForbidden = require('./ErrorForbidden');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
@@ -16,7 +17,7 @@ const tokenCheck = (req, res, next) => {
     req.user = payload;
     next();
   } catch (err) {
-    next(err);
+    next(new ErrorForbidden('Bad Token.'));
   }
 };
 
