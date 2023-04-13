@@ -14,8 +14,8 @@ const {
 
 const app = express();
 
-initDB();
 initLogging();
+initDB();
 
 app.use(cors());
 app.use(bodyParser.json());
